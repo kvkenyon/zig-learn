@@ -64,7 +64,9 @@ pub fn main() void {
     // at the first sentinel value.)
     printSequence(nums);
     printSequence(ptr);
-
+    const b: [:0]const u32 = &[4:0]u32{ 1, 2, 3, 4 };
+    const v = b[0];
+    print("{d}\n", .{v});
     print("\n", .{});
 }
 
@@ -82,7 +84,7 @@ fn printSequence(my_seq: anytype) void {
             print("Array:", .{});
 
             // Loop through the items in my_seq.
-            for (???) |s| {
+            for (my_seq) |s| {
                 print("{}", .{s});
             }
         },
@@ -94,9 +96,8 @@ fn printSequence(my_seq: anytype) void {
             // Loop through the items in my_seq until we hit the
             // sentinel value.
             var i: usize = 0;
-            while (??? != my_sentinel) {
+            while (my_seq[i] != my_sentinel) : (i += 1) {
                 print("{}", .{my_seq[i]});
-                i += 1;
             }
         },
         else => unreachable,
